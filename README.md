@@ -20,3 +20,9 @@ Facilitar el control de recursos y mejorar la organización de los laboratorios 
 
 ## Estado del proyecto
 Proyecto en fase inicial de planificación y diseño.
+
+## Acuerdo de trabajo por ramas
+
+- La rama `main` contendrá la versión estable del proyecto.
+- Cada integrante trabajará en una rama propia para desarrollar sus tareas.
+- Los cambios se revisarán antes de fusionarse con la rama `main`.
