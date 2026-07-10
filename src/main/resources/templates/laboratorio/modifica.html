@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{general/fragmentos :: head}"></head>
+<body>
+
+    <header th:replace="~{general/fragmentos :: header}"></header>
+    <aside th:replace="~{general/fragmentos :: menuLateral}"></aside>
+
+    <section>
+        <div style="background: white; padding: 30px; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.05); max-width: 500px; margin: 20px auto 0 auto; font-family: sans-serif;">
+            <h2 style="color: #1e2229; margin-top: 0; border-bottom: 3px solid #2980b9; padding-bottom: 8px;">
+                <i class="fas fa-edit" style="color: #2980b9;"></i> Actualizar Laboratorio
+            </h2>
+            
+            <form th:action="@{/laboratorios/guardar}" th:object="${laboratorio}" method="POST" style="display: flex; flex-direction: column; gap: 15px; margin-top: 20px;">
+                <input type="hidden" name="idLaboratorio" th:field="*{idLaboratorio}"/>
+                <input type="hidden" name="activo" th:field="*{activo}"/>
+                
+                <div style="display: flex; flex-direction: column; gap: 5px;">
+                    <label style="font-weight: bold; color: #555;">Nombre del Laboratorio:</label>
+                    <input type="text" name="nombre" th:field="*{nombre}" required style="padding: 10px; border: 1px solid #ccc; border-radius: 4px; font-size: 14px;"/>
+                </div>
+                
+                <div style="display: flex; flex-direction: column; gap: 5px;">
+                    <label style="font-weight: bold; color: #555;">Sede / Ubicación:</label>
+                    <input type="text" name="ubicacion" th:field="*{ubicacion}" required style="padding: 10px; border: 1px solid #ccc; border-radius: 4px; font-size: 14px;"/>
+                </div>
+                
+                <div style="display: flex; flex-direction: column; gap: 5px;">
+                    <label style="font-weight: bold; color: #555;">Capacidad Máxima:</label>
+                    <input type="number" name="capacidad" th:field="*{capacidad}" required style="padding: 10px; border: 1px solid #ccc; border-radius: 4px; font-size: 14px;"/>
+                </div>
+                
+                <div style="display: flex; gap: 12px; justify-content: flex-end; margin-top: 10px;">
+                    <a th:href="@{/laboratorios/listado}" style="background: #95a5a6; color: white; text-decoration: none; padding: 10px 20px; border-radius: 4px; font-weight: bold; font-size: 14px; text-align: center;">Regresar</a>
+                    <button type="submit" style="background: #2ecc71; color: white; border: none; padding: 10px 20px; border-radius: 4px; cursor: pointer; font-weight: bold; font-size: 14px;">Guardar Cambios</button>
+                </div>
+            </form>
+        </div>
+    </section>
+
+    <footer th:replace="~{general/fragmentos :: footer}"></footer>
+
+</body>
+</html>

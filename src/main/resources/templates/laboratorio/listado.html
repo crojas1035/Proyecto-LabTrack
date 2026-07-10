@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{general/fragmentos :: head}"></head>
+<body>
+
+    <header th:replace="~{general/fragmentos :: header}"></header>
+    <aside th:replace="~{general/fragmentos :: menuLateral}"></aside>
+
+    <section style="margin-left: 250px; padding: 20px;">
+        <div style="background: white; padding: 25px; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.05); font-family: sans-serif;">
+            <h2 style="color: #1e2229; margin-top: 0; margin-bottom: 20px; font-size: 26px;">
+                <span style="border-bottom: 3px solid #2980b9; padding-bottom: 5px;">Control de Laboratorios</span>
+            </h2>
+            
+            <div th:replace="~{laboratorio/fragmentos :: botonesAgregar}"></div>
+            
+            <table style="width: 100%; border-collapse: collapse; margin-top: 20px; text-align: left; box-shadow: 0 1px 3px rgba(0,0,0,0.1);">
+                <thead>
+                    <tr style="background-color: #1e2229; color: white;">
+                        <th style="padding: 12px; border: 1px solid #ddd;">ID</th>
+                        <th style="padding: 12px; border: 1px solid #ddd;">Nombre</th>
+                        <th style="padding: 12px; border: 1px solid #ddd;">Ubicación</th>
+                        <th style="padding: 12px; border: 1px solid #ddd;">Capacidad</th>
+                        <th style="padding: 12px; border: 1px solid #ddd; text-align: center;">Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="lab : ${laboratorios}" style="border-bottom: 1px solid #ddd; background-color: #ffffff;">
+                        <td style="padding: 12px; color: #555;" th:text="${lab.idLaboratorio}">1</td>
+                        <td style="padding: 12px; font-weight: bold; color: #2c3e50;" th:text="${lab.nombre}">Laboratorio</td>
+                        <td style="padding: 12px; color: #555;" th:text="${lab.ubicacion}">Sede</td>
+                        <td style="padding: 12px; color: #555;" th:text="${lab.capacidad}">30</td>
+                        <td style="padding: 12px; text-align: center; display: flex; justify-content: center; gap: 15px;">
+                            
+                            <!-- Botón Editar (GET) -->
+                            <a th:href="@{/laboratorios/modificar/{id}(id=${lab.idLaboratorio})}" style="color: #2980b9; text-decoration: none; font-weight: bold; font-size: 14px;">
+                                <i class="fas fa-pencil-alt"></i> Editar
+                            </a>
+                            
+                            <!-- Formulario Eliminar (POST - coincide con tu controlador) -->
+                            <form th:action="@{/laboratorios/eliminar}" method="post" style="margin: 0;">
+                                <input type="hidden" name="idLaboratorio" th:value="${lab.idLaboratorio}" />
+                                <button type="submit" style="color: #e74c3c; background: none; border: none; font-weight: bold; font-size: 14px; cursor: pointer; padding: 0;">
+                                    <i class="fas fa-trash-alt"></i> Eliminar
+                                </button>
+                            </form>
+                        </td>
+                    </tr>
+                    <tr th:if="${laboratorios == null or laboratorios.empty}">
+                        <td colspan="5" style="padding: 25px; text-align: center; color: #7f8c8d; background-color: #fafafa;">
+                            No hay laboratorios registrados.
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div th:replace="~{laboratorio/fragmentos :: agregarLaboratorio}"></div>
+    </section>
+
+    <footer th:replace="~{general/fragmentos :: footer}"></footer>
+
+</body>
+</html>

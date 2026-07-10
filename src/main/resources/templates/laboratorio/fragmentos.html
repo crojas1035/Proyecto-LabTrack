@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head></head>
+<body>
+
+    <div th:fragment="botonesAgregar">
+        <button type="button" class="menu-item" style="background-color: #2ecc71; width: auto; display: inline-block; padding: 10px 20px; border: none; cursor: pointer; color: white; border-radius: 4px; font-weight: bold;" onclick="document.getElementById('modalAgregar').style.display='block'">
+            <i class="fas fa-plus"></i> Nuevo Laboratorio
+        </button>
+    </div>
+
+    <div th:fragment="agregarLaboratorio" id="modalAgregar" style="display:none; position: fixed; top: 20%; left: 35%; width: 30%; background: white; padding: 25px; border-radius: 8px; box-shadow: 0 4px 15px rgba(0,0,0,0.2); z-index: 2000; font-family: sans-serif;">
+        <h3 style="margin-top:0; color: #1e2229; border-bottom: 2px solid #2ecc71; padding-bottom: 8px;">Registrar Laboratorio</h3>
+        
+        <form th:action="@{/laboratorios/guardar}" method="POST" style="display: flex; flex-direction: column; gap: 12px; margin-top: 15px;">
+            
+            <div style="display: flex; flex-direction: column; gap: 5px;">
+                <label style="font-weight: bold; color: #555;">Nombre del Laboratorio:</label>
+                <input type="text" name="nombre" required style="padding: 8px; border: 1px solid #ccc; border-radius: 4px;"/>
+            </div>
+            
+            <div style="display: flex; flex-direction: column; gap: 5px;">
+                <label style="font-weight: bold; color: #555;">Sede / Ubicación:</label>
+                <input type="text" name="ubicacion" required style="padding: 8px; border: 1px solid #ccc; border-radius: 4px;"/>
+            </div>
+            
+            <div style="display: flex; flex-direction: column; gap: 5px;">
+                <label style="font-weight: bold; color: #555;">Capacidad (Estudiantes):</label>
+                <input type="number" name="capacidad" required style="padding: 8px; border: 1px solid #ccc; border-radius: 4px;"/>
+            </div>
+            
+            <input type="hidden" name="activo" value="true" />
+            
+            <div style="display: flex; gap: 10px; justify-content: flex-end; margin-top: 15px;">
+                <button type="button" style="background: #e74c3c; color: white; border: none; padding: 8px 15px; border-radius: 4px; cursor: pointer; font-weight: bold;" onclick="document.getElementById('modalAgregar').style.display='none'">Cancelar</button>
+                <button type="submit" style="background: #2ecc71; color: white; border: none; padding: 8px 15px; border-radius: 4px; cursor: pointer; font-weight: bold;">Guardar</button>
+            </div>
+        </form>
+    </div>
+
+</body>
+</html>

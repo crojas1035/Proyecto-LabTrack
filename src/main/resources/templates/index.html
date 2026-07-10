@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{general/fragmentos :: head}"></head>
+<body>
+
+    <header th:replace="~{general/fragmentos :: header}"></header>
+
+    <aside th:replace="~{general/fragmentos :: menuLateral}"></aside>
+
+    <section>
+        <div style="background-color: white; padding: 40px; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.06); text-align: center; margin-top: 20px;">
+            <h1 style="color: #2c3e50; font-size: 32px; margin-bottom: 10px;">Panel de Control LabTrack</h1>
+            <p style="color: #7f8c8d; font-size: 18px; max-width: 600px; margin: 0 auto 30px auto;">
+                Bienvenido al sistema integrado de gestión de infraestructura de Universidad Fidélitas. Utilice los módulos de administración para auditar los recursos.
+            </p>
+            
+            <div style="display: flex; justify-content: center; gap: 20px;">
+                <div style="background-color: #ebf5fb; padding: 25px; border-radius: 6px; width: 220px; border-left: 5px solid #2980b9; box-sizing: border-box;">
+                    <h4 style="margin: 0 0 12px 0; color: #2980b9; font-size: 20px;">Laboratorios</h4>
+                    <a th:href="@{/laboratorios/listado}" style="color: #1f618d; text-decoration: none; font-weight: bold; font-size: 15px;">Gestionar →</a>
+                </div>
+                <div style="background-color: #fef5e7; padding: 25px; border-radius: 6px; width: 220px; border-left: 5px solid #e67e22; box-sizing: border-box;">
+                    <h4 style="margin: 0 0 12px 0; color: #e67e22; font-size: 20px;">Equipos</h4>
+                    <a th:href="@{/equipo/listado}" style="color: #b35400; text-decoration: none; font-weight: bold; font-size: 15px;">Inventario →</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer th:replace="~{general/fragmentos :: footer}"></footer>
+
+</body>
+</html>

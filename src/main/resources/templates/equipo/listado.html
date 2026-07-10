@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{general/fragmentos :: head}"></head>
+<body>
+
+    <header th:replace="~{general/fragmentos :: header}"></header>
+    <aside th:replace="~{general/fragmentos :: menuLateral}"></aside>
+
+    <section>
+        <div style="background: white; padding: 25px; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.05); font-family: sans-serif;">
+            <h2 style="color: #1e2229; margin-top: 0; margin-bottom: 20px; font-size: 26px;">
+                <span style="border-bottom: 3px solid #e67e22; padding-bottom: 5px;">Inventario de Equipos</span>
+            </h2>
+            
+            <div th:replace="~{equipo/fragmentos :: botonesAgregar}"></div>
+            
+            <table style="width: 100%; border-collapse: collapse; margin-top: 20px; text-align: left; box-shadow: 0 1px 3px rgba(0,0,0,0.1);">
+                <thead>
+                    <tr style="background-color: #e67e22; color: white;">
+                        <th style="padding: 12px; border: 1px solid #ddd;">ID</th>
+                        <th style="padding: 12px; border: 1px solid #ddd;">Equipo</th>
+                        <th style="padding: 12px; border: 1px solid #ddd;">Marca / Modelo</th>
+                        <th style="padding: 12px; border: 1px solid #ddd;">Existencias</th>
+                        <th style="padding: 12px; border: 1px solid #ddd; text-align: center;">Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="eq : ${equipos}" style="border-bottom: 1px solid #ddd; background-color: #ffffff;">
+                        <td style="padding: 12px; color: #555;" th:text="${eq.idEquipo}">1</td>
+                        <td style="padding: 12px; font-weight: bold; color: #2c3e50;" th:text="${eq.nombre}">Switch Cisco 24 Puertos</td>
+                        <td style="padding: 12px; color: #555;" th:text="${eq.marca}">Cisco Systems</td>
+                        <td style="padding: 12px; color: #555;" th:text="${eq.existencias}">15 Unidades</td>
+                        <td style="padding: 12px; text-align: center; display: flex; justify-content: center; gap: 15px;">
+                            <a th:href="@{/equipo/modificar/}+${eq.idEquipo}" style="color: #e67e22; text-decoration: none; font-weight: bold; font-size: 14px;">
+                                <i class="fas fa-pencil-alt"></i> Editar
+                            </a>
+                            <a th:href="@{/equipo/eliminar/}+${eq.idEquipo}" style="color: #e74c3c; text-decoration: none; font-weight: bold; font-size: 14px;">
+                                <i class="fas fa-trash-alt"></i> Eliminar
+                            </a>
+                        </td>
+                    </tr>
+                    <tr th:if="${equipos == null or equipos.empty}">
+                        <td colspan="5" style="padding: 25px; text-align: center; color: #7f8c8d; background-color: #fafafa;">
+                            No hay equipos tecnológicos registrados.
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div th:replace="~{equipo/fragmentos :: agregarEquipo}"></div>
+    </section>
+
+    <footer th:replace="~{general/fragmentos :: footer}"></footer>
+
+</body>
+</html>

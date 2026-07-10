@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<!--
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this template
+-->
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:fragment="head">
+    <title>LabTrack - Gestión de Infraestructura</title>
+    <meta charset="UTF-8"/>
+    <link th:href="@{/css/estilos.css}" rel="stylesheet" type="text/css"/>
+</head>
+<body>
+
+    <header th:fragment="header">
+        <nav>
+            <a th:href="@{/}" class="logo">
+                <span>LabTrack</span>
+            </a>
+            <ul class="nav-menu">
+                <li class="nav-menu-item"><a class="nav-link" th:href="@{/}">Inicio</a></li>
+                <li class="nav-menu-item"><a class="nav-link" th:href="@{/laboratorios}">Laboratorios</a></li>
+                <li class="nav-menu-item"><a class="nav-link" th:href="@{/equipos}">Equipos</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <aside th:fragment="menuLateral">
+        <h3 style="font-size: 16px; margin-bottom: 15px; color: #333; font-family: sans-serif;">Navegación</h3>
+        <a th:href="@{/laboratorios}" class="menu-item">Ver Laboratorios</a>
+        <a th:href="@{/equipos}" class="menu-item" style="background-color: #e67e22;">Ver Equipos</a>
+    </aside>
+
+    <footer th:fragment="footer">
+        LabTrack &copy; 2026 | Universidad Fidélitas
+    </footer>
+
+</body>
+</html>
