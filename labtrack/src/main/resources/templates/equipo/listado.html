@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+
+    <head th:replace="~{general/fragmentos :: head}"></head>
+
+    <body>
+        <header th:replace="~{general/fragmentos :: header}"></header>
+
+        <section th:replace="~{general/fragmentos :: mensajes}"></section>
+
+        <main class="container mt-4">
+            <div class="d-flex justify-content-between
+                        align-items-center mb-3">
+
+                <div>
+                    <h2>Inventario de equipos</h2>
+
+                    <span class="badge text-bg-primary"
+                          th:text="${totalEquipos + ' registros'}">
+                    </span>
+                </div>
+
+                <a class="btn btn-success"
+                   th:href="@{/equipo/nuevo}">
+                    <i class="fa-solid fa-plus"></i>
+                    Registrar equipo
+                </a>
+            </div>
+
+            <div class="alert alert-info"
+                 th:if="${#lists.isEmpty(equipos)}">
+                No existen equipos registrados.
+            </div>
+
+            <div class="table-responsive"
+                 th:if="${!#lists.isEmpty(equipos)}">
+
+                <table class="table table-striped
+                              table-bordered align-middle">
+
+                    <thead class="table-dark">
+                        <tr>
+                            <th>Código</th>
+                            <th>Nombre</th>
+                            <th>Laboratorio</th>
+                            <th>Descripción</th>
+                            <th>Estado</th>
+                            <th>Activo</th>
+                            <th class="text-center">Acciones</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        <tr th:each="equipo : ${equipos}">
+                            <td th:text="${equipo.codigo}"></td>
+                            <td th:text="${equipo.nombre}"></td>
+
+                            <td th:text="${equipo.laboratorio.nombre}">
+                            </td>
+
+                            <td th:text="${equipo.descripcion}"></td>
+
+                            <td>
+                                <span class="badge text-bg-secondary"
+                                      th:text="${equipo.estado}">
+                                </span>
+                            </td>
+
+                            <td>
+                                <span th:if="${equipo.activo}"
+                                      class="badge text-bg-success">
+                                    Sí
+                                </span>
+
+                                <span th:unless="${equipo.activo}"
+                                      class="badge text-bg-danger">
+                                    No
+                                </span>
+                            </td>
+
+                            <td class="text-center">
+                                <a class="btn btn-warning btn-sm"
+                                   th:href="@{/equipo/modificar/} + ${equipo.idEquipo}">
+                                    <i class="fa-solid fa-pen"></i>
+                                    Modificar
+                                </a>
+
+                                <form th:if="${equipo.activo}"
+                                      th:action="@{/equipo/eliminar}"
+                                      method="post"
+                                      class="d-inline"
+                                      onsubmit="return confirm('¿Desea desactivar este equipo?');">
+
+                                    <input type="hidden"
+                                           name="idEquipo"
+                                           th:value="${equipo.idEquipo}"/>
+
+                                    <button type="submit"
+                                            class="btn btn-danger btn-sm">
+                                        <i class="fa-solid fa-ban"></i>
+                                        Desactivar
+                                    </button>
+                                </form>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </main>
+
+        <footer th:replace="~{general/fragmentos :: footer}"></footer>
+    </body>
+</html>
