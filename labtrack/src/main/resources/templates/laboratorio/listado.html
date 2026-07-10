@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+
+    <head th:replace="~{general/fragmentos :: head}"></head>
+
+    <body>
+        <header th:replace="~{general/fragmentos :: header}"></header>
+
+        <section th:replace="~{general/fragmentos :: mensajes}"></section>
+
+        <main class="container mt-4">
+            <div class="d-flex justify-content-between
+                        align-items-center mb-3">
+                <div>
+                    <h2>Listado de laboratorios</h2>
+                    <span class="badge text-bg-primary"
+                          th:text="${totalLaboratorios + ' registros'}">
+                    </span>
+                </div>
+
+                <a class="btn btn-success"
+                   th:href="@{/laboratorio/nuevo}">
+                    <i class="fa-solid fa-plus"></i>
+                    Registrar laboratorio
+                </a>
+            </div>
+
+            <div class="alert alert-info"
+                 th:if="${#lists.isEmpty(laboratorios)}">
+                No existen laboratorios registrados.
+            </div>
+
+            <div class="table-responsive"
+                 th:if="${!#lists.isEmpty(laboratorios)}">
+                <table class="table table-striped
+                              table-bordered align-middle">
+                    <thead class="table-dark">
+                        <tr>
+                            <th>Código</th>
+                            <th>Nombre</th>
+                            <th>Ubicación</th>
+                            <th>Estado</th>
+                            <th>Activo</th>
+                            <th class="text-center">Acciones</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        <tr th:each="laboratorio : ${laboratorios}">
+                            <td th:text="${laboratorio.codigo}"></td>
+                            <td th:text="${laboratorio.nombre}"></td>
+                            <td th:text="${laboratorio.ubicacion}"></td>
+
+                            <td>
+                                <span class="badge text-bg-secondary"
+                                      th:text="${laboratorio.estado}">
+                                </span>
+                            </td>
+
+                            <td>
+                                <span th:if="${laboratorio.activo}"
+                                      class="badge text-bg-success">
+                                    Sí
+                                </span>
+
+                                <span th:unless="${laboratorio.activo}"
+                                      class="badge text-bg-danger">
+                                    No
+                                </span>
+                            </td>
+
+                            <td class="text-center">
+                                <a class="btn btn-warning btn-sm"
+                                    th:href="@{/laboratorio/modificar/} + ${laboratorio.idLaboratorio}">
+                                     <i class="fa-solid fa-pen"></i>
+                                     Modificar
+                                     </a>
+
+                                <form th:if="${laboratorio.activo}"
+                                      th:action="@{/laboratorio/eliminar}"
+                                      method="post"
+                                      class="d-inline"
+                                      onsubmit="return confirm(
+                                      '¿Desea desactivar este laboratorio?');">
+
+                                    <input type="hidden"
+                                           name="idLaboratorio"
+                                           th:value="${laboratorio.idLaboratorio}"/>
+
+                                    <button type="submit"
+                                            class="btn btn-danger btn-sm">
+                                        <i class="fa-solid fa-ban"></i>
+                                        Desactivar
+                                    </button>
+                                </form>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </main>
+
+        <footer th:replace="~{general/fragmentos :: footer}"></footer>
+    </body>
+</html>
