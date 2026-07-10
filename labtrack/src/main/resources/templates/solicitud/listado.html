@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+
+    <head th:replace="~{general/fragmentos :: head}">
+        <title>LabTrack</title>
+    </head>
+
+    <body>
+        <header th:replace="~{general/fragmentos :: header}"></header>
+
+        <section th:replace="~{general/fragmentos :: mensajes}"></section>
+
+        <main class="container mt-4">
+            <div class="d-flex justify-content-between
+                        align-items-center mb-3">
+
+                <div>
+                    <h2>Solicitudes de uso</h2>
+
+                    <span class="badge text-bg-primary"
+                          th:text="${totalSolicitudes + ' registros'}">
+                    </span>
+                </div>
+
+                <a class="btn btn-success"
+                   th:href="@{/solicitud/nueva}">
+                    <i class="fa-solid fa-plus"></i>
+                    Nueva solicitud
+                </a>
+            </div>
+
+            <div class="alert alert-info"
+                 th:if="${#lists.isEmpty(solicitudes)}">
+                No existen solicitudes registradas.
+            </div>
+
+            <div class="table-responsive"
+                 th:if="${!#lists.isEmpty(solicitudes)}">
+
+                <table class="table table-striped
+                              table-bordered align-middle">
+
+                    <thead class="table-dark">
+                        <tr>
+                            <th>Usuario</th>
+                            <th>Laboratorio</th>
+                            <th>Fecha de uso</th>
+                            <th>Motivo</th>
+                            <th>Estado</th>
+                            <th class="text-center">Acciones</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        <tr th:each="solicitud : ${solicitudes}">
+                            <td th:text="${solicitud.usuario.nombre}"></td>
+
+                            <td th:text="${solicitud.laboratorio.nombre}">
+                            </td>
+
+                            <td th:text="${solicitud.fechaUso}"></td>
+
+                            <td th:text="${solicitud.motivo}"></td>
+
+                            <td>
+                                <span class="badge text-bg-secondary"
+                                      th:text="${solicitud.estado}">
+                                </span>
+                            </td>
+
+                            <td class="text-center">
+                                <div th:if="${solicitud.estado == 'Pendiente'}">
+
+                                    <form th:action="@{/solicitud/estado}"
+                                          method="post"
+                                          class="d-inline">
+
+                                        <input type="hidden"
+                                               name="idSolicitud"
+                                               th:value="${solicitud.idSolicitud}"/>
+
+                                        <input type="hidden"
+                                               name="estado"
+                                               value="Aprobada"/>
+
+                                        <button type="submit"
+                                                class="btn btn-success btn-sm">
+                                            <i class="fa-solid fa-check"></i>
+                                            Aprobar
+                                        </button>
+                                    </form>
+
+                                    <form th:action="@{/solicitud/estado}"
+                                          method="post"
+                                          class="d-inline">
+
+                                        <input type="hidden"
+                                               name="idSolicitud"
+                                               th:value="${solicitud.idSolicitud}"/>
+
+                                        <input type="hidden"
+                                               name="estado"
+                                               value="Rechazada"/>
+
+                                        <button type="submit"
+                                                class="btn btn-danger btn-sm">
+                                            <i class="fa-solid fa-xmark"></i>
+                                            Rechazar
+                                        </button>
+                                    </form>
+
+                                </div>
+
+                                <span th:unless="${solicitud.estado == 'Pendiente'}"
+                                      class="text-muted">
+                                    Procesada
+                                </span>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </main>
+
+        <footer th:replace="~{general/fragmentos :: footer}"></footer>
+    </body>
+</html>

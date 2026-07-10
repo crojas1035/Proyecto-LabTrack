@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+
+    <head th:replace="~{general/fragmentos :: head}">
+        <title>LabTrack</title>
+    </head>
+
+    <body>
+        <header th:replace="~{general/fragmentos :: header}"></header>
+
+        <section th:replace="~{general/fragmentos :: mensajes}"></section>
+
+        <main class="container mt-4">
+            <div class="card shadow">
+                <div class="card-header bg-dark text-white">
+                    <h2 class="h4 mb-0">
+                        Nueva solicitud de uso
+                    </h2>
+                </div>
+
+                <div class="card-body">
+                    <form th:action="@{/solicitud/guardar}"
+                          th:object="${solicitud}"
+                          method="post">
+
+                        <input type="hidden"
+                               th:field="*{idSolicitud}"/>
+
+                        <input type="hidden"
+                               th:field="*{estado}"/>
+
+                        <div class="mb-3">
+                            <label class="form-label">Usuario</label>
+
+                            <select class="form-select"
+                                    th:field="*{usuario.idUsuario}"
+                                    required>
+
+                                <option value="">
+                                    Seleccione un usuario
+                                </option>
+
+                                <option th:each="usuario : ${usuarios}"
+                                        th:value="${usuario.idUsuario}"
+                                        th:text="${usuario.nombre
+                                        + ' - ' + usuario.tipoUsuario}">
+                                </option>
+                            </select>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">Laboratorio</label>
+
+                            <select class="form-select"
+                                    th:field="*{laboratorio.idLaboratorio}"
+                                    required>
+
+                                <option value="">
+                                    Seleccione un laboratorio
+                                </option>
+
+                                <option th:each="laboratorio : ${laboratorios}"
+                                        th:value="${laboratorio.idLaboratorio}"
+                                        th:text="${laboratorio.nombre}">
+                                </option>
+                            </select>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">Fecha de uso</label>
+
+                            <input type="date"
+                                   class="form-control"
+                                   th:field="*{fechaUso}"
+                                   required/>
+
+                            <div class="text-danger"
+                                 th:if="${#fields.hasErrors('fechaUso')}"
+                                 th:errors="*{fechaUso}">
+                            </div>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">Motivo</label>
+
+                            <textarea class="form-control"
+                                      th:field="*{motivo}"
+                                      maxlength="255"
+                                      rows="4"
+                                      required>
+                            </textarea>
+
+                            <div class="text-danger"
+                                 th:if="${#fields.hasErrors('motivo')}"
+                                 th:errors="*{motivo}">
+                            </div>
+                        </div>
+
+                        <div class="d-flex gap-2">
+                            <button type="submit"
+                                    class="btn btn-success">
+                                <i class="fa-solid fa-paper-plane"></i>
+                                Enviar solicitud
+                            </button>
+
+                            <a class="btn btn-secondary"
+                               th:href="@{/solicitud/listado}">
+                                Cancelar
+                            </a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </main>
+
+        <footer th:replace="~{general/fragmentos :: footer}"></footer>
+    </body>
+</html>
