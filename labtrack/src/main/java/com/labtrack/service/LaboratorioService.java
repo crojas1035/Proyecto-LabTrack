@@ -25,6 +25,11 @@ public class LaboratorioService {
 
         return laboratorioRepository.findAll();
     }
+    
+    @Transactional(readOnly = true)
+public List<Laboratorio> buscarPorEstado(String estado) {
+    return laboratorioRepository.findByEstadoIgnoreCase(estado);
+}
 
     @Transactional(readOnly = true)
     public Optional<Laboratorio> getLaboratorio(

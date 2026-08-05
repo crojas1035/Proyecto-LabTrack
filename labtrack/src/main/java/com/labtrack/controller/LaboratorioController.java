@@ -111,5 +111,22 @@ public class LaboratorioController {
         }
 
         return "redirect:/laboratorio/listado";
+        
+        
+    }
+    
+    @GetMapping("/buscarPorEstado")
+public String buscarPorEstado(
+        @RequestParam String estado,
+        Model model) {
+
+    var laboratorios = laboratorioService
+            .buscarPorEstado(estado);
+
+    model.addAttribute("laboratorios", laboratorios);
+    model.addAttribute("totalLaboratorios",
+            laboratorios.size());
+
+    return "/laboratorio/listado";
     }
 }

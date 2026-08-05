@@ -10,4 +10,5 @@ public interface LaboratorioRepository
         extends JpaRepository<Laboratorio, Integer> {
 
     public List<Laboratorio> findByActivoTrue();
+    public List<Laboratorio> findByEstadoIgnoreCase(String estado);
 }

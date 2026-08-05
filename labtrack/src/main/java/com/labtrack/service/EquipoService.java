@@ -24,6 +24,11 @@ public class EquipoService {
 
         return equipoRepository.findAll();
     }
+    
+    @Transactional(readOnly = true)
+public List<Equipo> buscarPorLaboratorio(String nombreLaboratorio) {
+    return equipoRepository.buscarPorLaboratorio(nombreLaboratorio);
+}
 
     @Transactional(readOnly = true)
     public Optional<Equipo> getEquipo(Integer idEquipo) {

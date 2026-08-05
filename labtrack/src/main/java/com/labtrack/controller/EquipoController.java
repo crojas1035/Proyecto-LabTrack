@@ -161,4 +161,17 @@ public class EquipoController {
 
         return "redirect:/equipo/listado";
     }
+    @GetMapping("/buscarPorLaboratorio")
+public String buscarPorLaboratorio(
+        @RequestParam String nombreLaboratorio,
+        Model model) {
+
+    var equipos = equipoService
+            .buscarPorLaboratorio(nombreLaboratorio);
+
+    model.addAttribute("equipos", equipos);
+    model.addAttribute("totalEquipos", equipos.size());
+
+    return "/equipo/listado";
+    }
 }
