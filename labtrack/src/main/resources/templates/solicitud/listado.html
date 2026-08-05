@@ -16,22 +16,30 @@
                         align-items-center mb-3">
 
                 <div>
-                    <h2>Solicitudes de uso</h2>
+                    <h2 th:text="#{solicitud.listado}">
+                        Solicitudes de uso
+                    </h2>
 
                     <span class="badge text-bg-primary"
-                          th:text="${totalSolicitudes + ' registros'}">
+                          th:text="${totalSolicitudes + ' '
+                          + #messages.msg('solicitud.registros')}">
+                        0 registros
                     </span>
                 </div>
 
                 <a class="btn btn-success"
                    th:href="@{/solicitud/nueva}">
                     <i class="fa-solid fa-plus"></i>
-                    Nueva solicitud
+
+                    <span th:text="#{solicitud.nueva}">
+                        Nueva solicitud
+                    </span>
                 </a>
             </div>
 
             <div class="alert alert-info"
-                 th:if="${#lists.isEmpty(solicitudes)}">
+                 th:if="${#lists.isEmpty(solicitudes)}"
+                 th:text="#{solicitud.vacio}">
                 No existen solicitudes registradas.
             </div>
 
@@ -43,12 +51,30 @@
 
                     <thead class="table-dark">
                         <tr>
-                            <th>Usuario</th>
-                            <th>Laboratorio</th>
-                            <th>Fecha de uso</th>
-                            <th>Motivo</th>
-                            <th>Estado</th>
-                            <th class="text-center">Acciones</th>
+                            <th th:text="#{solicitud.usuario}">
+                                Usuario
+                            </th>
+
+                            <th th:text="#{solicitud.laboratorio}">
+                                Laboratorio
+                            </th>
+
+                            <th th:text="#{solicitud.fecha}">
+                                Fecha de uso
+                            </th>
+
+                            <th th:text="#{solicitud.motivo}">
+                                Motivo
+                            </th>
+
+                            <th th:text="#{solicitud.estado}">
+                                Estado
+                            </th>
+
+                            <th class="text-center"
+                                th:text="#{solicitud.acciones}">
+                                Acciones
+                            </th>
                         </tr>
                     </thead>
 
@@ -56,8 +82,7 @@
                         <tr th:each="solicitud : ${solicitudes}">
                             <td th:text="${solicitud.usuario.nombre}"></td>
 
-                            <td th:text="${solicitud.laboratorio.nombre}">
-                            </td>
+                            <td th:text="${solicitud.laboratorio.nombre}"></td>
 
                             <td th:text="${solicitud.fechaUso}"></td>
 
@@ -65,7 +90,21 @@
 
                             <td>
                                 <span class="badge text-bg-secondary"
-                                      th:text="${solicitud.estado}">
+                                      th:if="${solicitud.estado == 'Pendiente'}"
+                                      th:text="#{estado.pendiente}">
+                                    Pendiente
+                                </span>
+
+                                <span class="badge text-bg-success"
+                                      th:if="${solicitud.estado == 'Aprobada'}"
+                                      th:text="#{estado.aprobada}">
+                                    Aprobada
+                                </span>
+
+                                <span class="badge text-bg-danger"
+                                      th:if="${solicitud.estado == 'Rechazada'}"
+                                      th:text="#{estado.rechazada}">
+                                    Rechazada
                                 </span>
                             </td>
 
@@ -87,7 +126,10 @@
                                         <button type="submit"
                                                 class="btn btn-success btn-sm">
                                             <i class="fa-solid fa-check"></i>
-                                            Aprobar
+
+                                            <span th:text="#{boton.aprobar}">
+                                                Aprobar
+                                            </span>
                                         </button>
                                     </form>
 
@@ -106,14 +148,17 @@
                                         <button type="submit"
                                                 class="btn btn-danger btn-sm">
                                             <i class="fa-solid fa-xmark"></i>
-                                            Rechazar
+
+                                            <span th:text="#{boton.rechazar}">
+                                                Rechazar
+                                            </span>
                                         </button>
                                     </form>
-
                                 </div>
 
                                 <span th:unless="${solicitud.estado == 'Pendiente'}"
-                                      class="text-muted">
+                                      class="text-muted"
+                                      th:text="#{solicitud.procesada}">
                                     Procesada
                                 </span>
                             </td>
