@@ -18,7 +18,7 @@ public class WebConfig implements WebMvcConfigurer {
                 = new SessionLocaleResolver();
 
         resolver.setDefaultLocale(
-                Locale.forLanguageTag("es"));
+                Locale.forLanguageTag("en"));
 
         return resolver;
     }

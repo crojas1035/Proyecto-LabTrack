@@ -28,6 +28,9 @@ public class PrestamoService {
 
     @Transactional
     public void save(Prestamo prestamo) {
+        if (prestamo.getFechaPrestamo() == null) {
+            prestamo.setFechaPrestamo(new java.sql.Date(System.currentTimeMillis()));
+        }
         if (prestamo.getDetalles() != null) {
             prestamo.getDetalles().forEach(detalle -> detalle.setPrestamo(prestamo));
         }

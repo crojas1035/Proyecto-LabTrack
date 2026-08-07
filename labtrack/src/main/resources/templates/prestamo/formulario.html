@@ -4,36 +4,43 @@
     <body>
         <header th:replace="~{general/fragmentos :: header}"></header>
         <main class="container mt-4">
-            <h2>Formulario de Préstamo</h2>
+            <h2>Loan Form</h2>
             <form th:action="@{/prestamo/guardar}" th:object="${prestamo}" method="post">
                 <input type="hidden" th:field="*{idPrestamo}"/>
                 
                 <div class="mb-3">
-                    <label>Usuario</label>
+                    <label>User</label>
                     <select class="form-select" th:field="*{usuario.idUsuario}">
+                        <option th:if="${#lists.isEmpty(usuarios)}" value="" disabled selected>No users found</option>
+                        <option th:unless="${#lists.isEmpty(usuarios)}" value="">Select User</option>
                         <option th:each="u : ${usuarios}" th:value="${u.idUsuario}" th:text="${u.nombre}"></option>
                     </select>
                 </div>
 
                 <div class="mb-3">
-                    <label>Fecha Esperada</label>
+                    <label>Loan Date</label>
+                    <input type="date" class="form-control" th:field="*{fechaPrestamo}"/>
+                </div>
+
+                <div class="mb-3">
+                    <label>Expected Return</label>
                     <input type="date" class="form-control" th:field="*{fechaDevolucionEsperada}"/>
                 </div>
 
                 <div class="mb-3">
-                    <label>Estado</label>
+                    <label>Status</label>
                     <select class="form-select" th:field="*{estado}">
-                        <option value="Vigente">Vigente</option>
-                        <option value="Devuelto">Devuelto</option>
-                        <option value="Atrasado">Atrasado</option>
+                        <option value="Active">Active</option>
+                        <option value="Returned">Returned</option>
+                        <option value="Overdue">Overdue</option>
                     </select>
                 </div>
 
                 <div class="mb-3">
-                    <label>Activo</label>
+                    <label>Active</label>
                     <input type="checkbox" th:field="*{activo}"/>
                 </div>
-                <button type="submit" class="btn btn-primary">Guardar</button>
+                <button type="submit" class="btn btn-primary">Save</button>
             </form>
         </main>
     </body>

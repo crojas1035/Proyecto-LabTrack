@@ -6,13 +6,13 @@
         <section th:replace="~{general/fragmentos :: mensajes}"></section>
         <main class="container mt-4">
             <div class="d-flex justify-content-between align-items-center mb-3">
-                <div><h2>Préstamos de Equipos</h2></div>
-                <a class="btn btn-success" th:href="@{/prestamo/nuevo}">Registrar préstamo</a>
+                <div><h2>Equipment Loans</h2></div>
+                <a class="btn btn-success" th:href="@{/prestamo/nuevo}">Register loan</a>
             </div>
             <div class="table-responsive">
                 <table class="table table-striped table-bordered align-middle">
                     <thead class="table-dark">
-                        <tr><th>ID</th><th>Usuario</th><th>Fecha Préstamo</th><th>Fecha Esperada</th><th>Estado</th><th>Activo</th><th>Acciones</th></tr>
+                        <tr><th>ID</th><th>User</th><th>Loan Date</th><th>Expected Return</th><th>Status</th><th>Active</th><th>Actions</th></tr>
                     </thead>
                     <tbody>
                         <tr th:each="p : ${prestamos}">
@@ -23,10 +23,10 @@
                             <td th:text="${p.estado}"></td>
                             <td th:text="${p.activo}"></td>
                             <td class="text-center">
-                                <a class="btn btn-warning btn-sm" th:href="@{/prestamo/modificar/} + ${p.idPrestamo}">Modificar</a>
+                                <a class="btn btn-warning btn-sm" th:href="@{/prestamo/modificar/} + ${p.idPrestamo}">Edit</a>
                                 <form th:if="${p.activo}" th:action="@{/prestamo/eliminar}" method="post" class="d-inline">
                                     <input type="hidden" name="idPrestamo" th:value="${p.idPrestamo}"/>
-                                    <button type="submit" class="btn btn-danger btn-sm">Desactivar</button>
+                                    <button type="submit" class="btn btn-danger btn-sm">Deactivate</button>
                                 </form>
                             </td>
                         </tr>

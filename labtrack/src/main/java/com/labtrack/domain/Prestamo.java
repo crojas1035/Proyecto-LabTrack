@@ -4,7 +4,6 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.sql.Date;
-import java.sql.Timestamp;
 import java.util.List;
 import lombok.Data;
 
@@ -23,8 +22,8 @@ public class Prestamo implements Serializable {
     @NotNull
     private Usuario usuario;
 
-    @Column(insertable = false, updatable = false)
-    private Timestamp fechaPrestamo;
+    @Column(name = "fecha_prestamo")
+    private Date fechaPrestamo;
 
     @Column(nullable = false)
     @NotNull
