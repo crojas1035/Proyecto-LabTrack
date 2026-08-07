@@ -47,4 +47,9 @@ public class Equipo implements Serializable {
     @JoinColumn(name = "id_laboratorio", nullable = false)
     @NotNull
     private Laboratorio laboratorio;
+
+    @ManyToOne
+    @JoinColumn(name = "id_categoria", nullable = false)
+    @NotNull
+    private CategoriaEquipo categoria;
 }

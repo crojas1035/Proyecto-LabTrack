@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+    <head th:replace="~{general/fragmentos :: head}"></head>
+    <body>
+        <header th:replace="~{general/fragmentos :: header}"></header>
+        <main class="container mt-4">
+            <h2>Formulario de Préstamo</h2>
+            <form th:action="@{/prestamo/guardar}" th:object="${prestamo}" method="post">
+                <input type="hidden" th:field="*{idPrestamo}"/>
+                
+                <div class="mb-3">
+                    <label>Usuario</label>
+                    <select class="form-select" th:field="*{usuario.idUsuario}">
+                        <option th:each="u : ${usuarios}" th:value="${u.idUsuario}" th:text="${u.nombre}"></option>
+                    </select>
+                </div>
+
+                <div class="mb-3">
+                    <label>Fecha Esperada</label>
+                    <input type="date" class="form-control" th:field="*{fechaDevolucionEsperada}"/>
+                </div>
+
+                <div class="mb-3">
+                    <label>Estado</label>
+                    <select class="form-select" th:field="*{estado}">
+                        <option value="Vigente">Vigente</option>
+                        <option value="Devuelto">Devuelto</option>
+                        <option value="Atrasado">Atrasado</option>
+                    </select>
+                </div>
+
+                <div class="mb-3">
+                    <label>Activo</label>
+                    <input type="checkbox" th:field="*{activo}"/>
+                </div>
+                <button type="submit" class="btn btn-primary">Guardar</button>
+            </form>
+        </main>
+    </body>
+</html>

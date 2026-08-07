@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+    <head th:replace="~{general/fragmentos :: head}"></head>
+    <body>
+        <header th:replace="~{general/fragmentos :: header}"></header>
+        <main class="container mt-4">
+            <h2>Categoría Equipo</h2>
+            <form th:action="@{/categoria/guardar}" th:object="${categoria}" method="post">
+                <input type="hidden" th:field="*{idCategoria}"/>
+                <div class="mb-3">
+                    <label>Nombre</label>
+                    <input type="text" class="form-control" th:field="*{nombre}"/>
+                </div>
+                <div class="mb-3">
+                    <label>Activo</label>
+                    <input type="checkbox" th:field="*{activo}"/>
+                </div>
+                <button type="submit" class="btn btn-primary">Guardar</button>
+            </form>
+        </main>
+    </body>
+</html>
