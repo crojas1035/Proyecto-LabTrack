@@ -29,4 +29,9 @@ public class UsuarioService {
     public Optional<Usuario> getUsuario(Integer idUsuario) {
         return usuarioRepository.findById(idUsuario);
     }
+
+    @Transactional
+    public void save(Usuario usuario) {
+        usuarioRepository.save(usuario);
+    }
 }

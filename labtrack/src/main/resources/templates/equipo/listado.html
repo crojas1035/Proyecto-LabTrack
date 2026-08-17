@@ -14,23 +14,23 @@
                         align-items-center mb-3">
 
                 <div>
-                    <h2>Inventario de equipos</h2>
+                    <h2>Equipment Inventory</h2>
 
                     <span class="badge text-bg-primary"
-                          th:text="${totalEquipos + ' registros'}">
+                          th:text="${totalEquipos + ' records'}">
                     </span>
                 </div>
 
                 <a class="btn btn-success"
                    th:href="@{/equipo/nuevo}">
                     <i class="fa-solid fa-plus"></i>
-                    Registrar equipo
+                    Register equipment
                 </a>
             </div>
 
             <div class="alert alert-info"
                  th:if="${#lists.isEmpty(equipos)}">
-                No existen equipos registrados.
+                There is no registered equipment.
             </div>
 
             <div class="table-responsive"
@@ -41,13 +41,14 @@
 
                     <thead class="table-dark">
                         <tr>
-                            <th>Código</th>
-                            <th>Nombre</th>
-                            <th>Laboratorio</th>
-                            <th>Descripción</th>
-                            <th>Estado</th>
-                            <th>Activo</th>
-                            <th class="text-center">Acciones</th>
+                            <th>Code</th>
+                            <th>Name</th>
+                            <th>Category</th>
+                            <th>Laboratory</th>
+                            <th>Description</th>
+                            <th>Status</th>
+                            <th>Active</th>
+                            <th class="text-center">Actions</th>
                         </tr>
                     </thead>
 
@@ -55,6 +56,8 @@
                         <tr th:each="equipo : ${equipos}">
                             <td th:text="${equipo.codigo}"></td>
                             <td th:text="${equipo.nombre}"></td>
+                            
+                            <td th:text="${equipo.categoria != null ? equipo.categoria.nombre : 'None'}"></td>
 
                             <td th:text="${equipo.laboratorio.nombre}">
                             </td>
@@ -70,7 +73,7 @@
                             <td>
                                 <span th:if="${equipo.activo}"
                                       class="badge text-bg-success">
-                                    Sí
+                                    Yes
                                 </span>
 
                                 <span th:unless="${equipo.activo}"
@@ -83,14 +86,14 @@
                                 <a class="btn btn-warning btn-sm"
                                    th:href="@{/equipo/modificar/} + ${equipo.idEquipo}">
                                     <i class="fa-solid fa-pen"></i>
-                                    Modificar
+                                    Edit
                                 </a>
 
                                 <form th:if="${equipo.activo}"
                                       th:action="@{/equipo/eliminar}"
                                       method="post"
                                       class="d-inline"
-                                      onsubmit="return confirm('¿Desea desactivar este equipo?');">
+                                      onsubmit="return confirm('Do you want to deactivate this equipment?');">
 
                                     <input type="hidden"
                                            name="idEquipo"
@@ -99,7 +102,7 @@
                                     <button type="submit"
                                             class="btn btn-danger btn-sm">
                                         <i class="fa-solid fa-ban"></i>
-                                        Desactivar
+                                        Deactivate
                                     </button>
                                 </form>
                             </td>

@@ -1,5 +1,7 @@
 package com.labtrack.controller;
 
+import com.labtrack.domain.CategoriaEquipo;
+import com.labtrack.service.CategoriaEquipoService;
 import com.labtrack.domain.Equipo;
 import com.labtrack.domain.Laboratorio;
 import com.labtrack.service.EquipoService;
@@ -22,13 +24,16 @@ public class EquipoController {
 
     private final EquipoService equipoService;
     private final LaboratorioService laboratorioService;
+    private final CategoriaEquipoService categoriaService;
 
     public EquipoController(
             EquipoService equipoService,
-            LaboratorioService laboratorioService) {
+            LaboratorioService laboratorioService,
+            CategoriaEquipoService categoriaService) {
 
         this.equipoService = equipoService;
         this.laboratorioService = laboratorioService;
+        this.categoriaService = categoriaService;
     }
 
     @GetMapping("/listado")
@@ -52,6 +57,9 @@ public class EquipoController {
         model.addAttribute(
                 "laboratorios",
                 laboratorioService.getLaboratorios(true));
+        model.addAttribute(
+                "categorias",
+                categoriaService.getCategorias());
 
         return "/equipo/formulario";
     }
@@ -74,6 +82,9 @@ public class EquipoController {
             model.addAttribute(
                     "laboratorios",
                     laboratorioService.getLaboratorios(true));
+            model.addAttribute(
+                    "categorias",
+                    categoriaService.getCategorias());
 
             return "/equipo/formulario";
         }
@@ -82,6 +93,9 @@ public class EquipoController {
             model.addAttribute(
                     "laboratorios",
                     laboratorioService.getLaboratorios(true));
+            model.addAttribute(
+                    "categorias",
+                    categoriaService.getCategorias());
 
             return "/equipo/formulario";
         }
@@ -102,6 +116,9 @@ public class EquipoController {
             model.addAttribute(
                     "laboratorios",
                     laboratorioService.getLaboratorios(true));
+            model.addAttribute(
+                    "categorias",
+                    categoriaService.getCategorias());
 
             return "/equipo/formulario";
         }
@@ -137,6 +154,9 @@ public class EquipoController {
         model.addAttribute(
                 "laboratorios",
                 laboratorioService.getLaboratorios(true));
+        model.addAttribute(
+                "categorias",
+                categoriaService.getCategorias());
 
         return "/equipo/formulario";
     }
