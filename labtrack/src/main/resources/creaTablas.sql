@@ -169,12 +169,11 @@ create table detalle_prestamo (
 insert into usuario
 (nombre, correo, password, tipo_usuario, activo)
 values
-('Ana Solís', 'ana.solis@labtrack.com', 'clave123', 'ADMIN', true),
-('Marco Vega', 'marco.vega@labtrack.com', 'clave123', 'ENCARGADO', true),
-('Laura Ruiz', 'laura.ruiz@labtrack.com', 'clave123', 'DOCENTE', true),
-('Diego Mora', 'diego.mora@labtrack.com', 'clave123', 'ESTUDIANTE', true),
-('Sofía Campos', 'sofia.campos@labtrack.com', 'clave123', 'TECNICO', true);
-
+('Ana Solís', 'ana.solis@labtrack.com', '$2b$10$Pc8BkD1acrtWanu3qM011O1.FKmzzoCVstE0nRhiXmNuQuiiV3L4u', 'ADMIN', true),
+('Marco Vega', 'marco.vega@labtrack.com', '$2b$10$LmIto.J5QBJdPea50aXf8ONOMgseHU7ct6zNzAEhAgDoRq6pTYPee', 'ENCARGADO', true),
+('Laura Ruiz', 'laura.ruiz@labtrack.com', '$2b$10$Nowdt3yqPF4.UCHArwUna.wbvu1C/QPI1JD7XcRxCSOpdvplNbIfK', 'DOCENTE', true),
+('Diego Mora', 'diego.mora@labtrack.com', '$2b$10$vWlINfKT58gnL79laJ4Zlu9PtFVcHftzSL54YT97vE6zS0S/3Bn02', 'ESTUDIANTE', true),
+('Sofía Campos', 'sofia.campos@labtrack.com', '$2b$10$/8qLxM0u9BaFTHLLkUxslOjk3mQlxIYp32dbEHgwWL40x0Jlwj/Va', 'TECNICO', true);
 -- Datos de prueba para laboratorios
 insert into laboratorio
 (codigo, nombre, ubicacion, estado, activo)
