@@ -14,8 +14,8 @@
                 <div class="card-header bg-dark text-white">
                     <h2 class="h4 mb-0"
                         th:text="${equipo.idEquipo == null}
-                        ? 'Registrar equipo'
-                        : 'Modificar equipo'">
+                        ? 'Register equipment'
+                        : 'Edit equipment'">
                     </h2>
                 </div>
 
@@ -31,7 +31,7 @@
                                th:field="*{activo}"/>
 
                         <div class="mb-3">
-                            <label class="form-label">Código</label>
+                            <label class="form-label">Code</label>
 
                             <input type="text"
                                    class="form-control"
@@ -46,7 +46,7 @@
                         </div>
 
                         <div class="mb-3">
-                            <label class="form-label">Nombre</label>
+                            <label class="form-label">Name</label>
 
                             <input type="text"
                                    class="form-control"
@@ -61,7 +61,7 @@
                         </div>
 
                         <div class="mb-3">
-                            <label class="form-label">Descripción</label>
+                            <label class="form-label">Description</label>
 
                             <textarea class="form-control"
                                       th:field="*{descripcion}"
@@ -70,14 +70,14 @@
                         </div>
 
                         <div class="mb-3">
-                            <label class="form-label">Laboratorio</label>
+                            <label class="form-label">Laboratory</label>
 
                             <select class="form-select"
                                     th:field="*{laboratorio.idLaboratorio}"
                                     required>
 
                                 <option value="">
-                                    Seleccione un laboratorio
+                                    Select a laboratory
                                 </option>
 
                                 <option th:each="laboratorio : ${laboratorios}"
@@ -88,26 +88,44 @@
                         </div>
 
                         <div class="mb-3">
-                            <label class="form-label">Estado</label>
+                            <label class="form-label">Category</label>
+
+                            <select class="form-select"
+                                    th:field="*{categoria.idCategoria}"
+                                    required>
+
+                                <option value="">
+                                    Select a category
+                                </option>
+
+                                <option th:each="cat : ${categorias}"
+                                        th:value="${cat.idCategoria}"
+                                        th:text="${cat.nombre}">
+                                </option>
+                            </select>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">Status</label>
 
                             <select class="form-select"
                                     th:field="*{estado}"
                                     required>
 
-                                <option value="Disponible">
-                                    Disponible
+                                <option value="Available">
+                                    Available
                                 </option>
 
-                                <option value="En uso">
-                                    En uso
+                                <option value="In use">
+                                    In use
                                 </option>
 
-                                <option value="Mantenimiento">
-                                    Mantenimiento
+                                <option value="Maintenance">
+                                    Maintenance
                                 </option>
 
-                                <option value="Fuera de servicio">
-                                    Fuera de servicio
+                                <option value="Out of service">
+                                    Out of service
                                 </option>
                             </select>
                         </div>
@@ -116,12 +134,12 @@
                             <button type="submit"
                                     class="btn btn-success">
                                 <i class="fa-solid fa-floppy-disk"></i>
-                                Guardar
+                                Save
                             </button>
 
                             <a class="btn btn-secondary"
                                th:href="@{/equipo/listado}">
-                                Cancelar
+                                Cancel
                             </a>
                         </div>
                     </form>

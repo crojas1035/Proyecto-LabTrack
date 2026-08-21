@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+    <head th:replace="~{general/fragmentos :: head}"></head>
+    <body>
+        <header th:replace="~{general/fragmentos :: header}"></header>
+        <section th:replace="~{general/fragmentos :: mensajes}"></section>
+        <main class="container mt-4">
+            <div class="d-flex justify-content-between align-items-center mb-3">
+                <div><h2>Equipment Categories</h2></div>
+                <a class="btn btn-success" th:href="@{/categoria/nuevo}">Register category</a>
+            </div>
+            <div class="table-responsive">
+                <table class="table table-striped table-bordered align-middle">
+                    <thead class="table-dark">
+                        <tr><th>ID</th><th>Name</th><th>Active</th><th>Actions</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr th:each="cat : ${categorias}">
+                            <td th:text="${cat.idCategoria}"></td>
+                            <td th:text="${cat.nombre}"></td>
+                            <td th:text="${cat.activo}"></td>
+                            <td class="text-center">
+                                <a class="btn btn-warning btn-sm" th:href="@{/categoria/modificar/} + ${cat.idCategoria}">Edit</a>
+                                <form th:if="${cat.activo}" th:action="@{/categoria/eliminar}" method="post" class="d-inline">
+                                    <input type="hidden" name="idCategoria" th:value="${cat.idCategoria}"/>
+                                    <button type="submit" class="btn btn-danger btn-sm">Deactivate</button>
+                                </form>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </main>
+        <footer th:replace="~{general/fragmentos :: footer}"></footer>
+    </body>
+</html>

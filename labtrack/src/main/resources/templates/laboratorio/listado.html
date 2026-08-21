@@ -13,36 +13,49 @@
             <div class="d-flex justify-content-between
                         align-items-center mb-3">
                 <div>
-                    <h2>Listado de laboratorios</h2>
+                    <h2 th:text="#{laboratorio.listado}">
+                        Listado de laboratorios
+                    </h2>
+
                     <span class="badge text-bg-primary"
-                          th:text="${totalLaboratorios + ' registros'}">
+                          th:text="${totalLaboratorios + ' ' + #messages.msg('laboratorio.registros')}">
+                        0 registros
                     </span>
                 </div>
 
                 <a class="btn btn-success"
                    th:href="@{/laboratorio/nuevo}">
                     <i class="fa-solid fa-plus"></i>
-                    Registrar laboratorio
+                    <span th:text="#{laboratorio.registrar}">
+                        Registrar laboratorio
+                    </span>
                 </a>
             </div>
 
             <div class="alert alert-info"
-                 th:if="${#lists.isEmpty(laboratorios)}">
+                 th:if="${#lists.isEmpty(laboratorios)}"
+                 th:text="#{laboratorio.vacio}">
                 No existen laboratorios registrados.
             </div>
 
             <div class="table-responsive"
                  th:if="${!#lists.isEmpty(laboratorios)}">
+
                 <table class="table table-striped
                               table-bordered align-middle">
+
                     <thead class="table-dark">
                         <tr>
-                            <th>Código</th>
-                            <th>Nombre</th>
-                            <th>Ubicación</th>
-                            <th>Estado</th>
-                            <th>Activo</th>
-                            <th class="text-center">Acciones</th>
+                            <th th:text="#{laboratorio.codigo}">Código</th>
+                            <th th:text="#{laboratorio.nombre}">Nombre</th>
+                            <th th:text="#{laboratorio.ubicacion}">Ubicación</th>
+                            <th th:text="#{laboratorio.estado}">Estado</th>
+                            <th th:text="#{laboratorio.activo}">Activo</th>
+
+                            <th class="text-center"
+                                th:text="#{laboratorio.acciones}">
+                                Acciones
+                            </th>
                         </tr>
                     </thead>
 
@@ -60,29 +73,35 @@
 
                             <td>
                                 <span th:if="${laboratorio.activo}"
-                                      class="badge text-bg-success">
+                                      class="badge text-bg-success"
+                                      th:text="#{respuesta.si}">
                                     Sí
                                 </span>
 
                                 <span th:unless="${laboratorio.activo}"
-                                      class="badge text-bg-danger">
+                                      class="badge text-bg-danger"
+                                      th:text="#{respuesta.no}">
                                     No
                                 </span>
                             </td>
 
                             <td class="text-center">
                                 <a class="btn btn-warning btn-sm"
-                                    th:href="@{/laboratorio/modificar/} + ${laboratorio.idLaboratorio}">
-                                     <i class="fa-solid fa-pen"></i>
-                                     Modificar
-                                     </a>
+                                   th:href="@{/laboratorio/modificar/}
+                                   + ${laboratorio.idLaboratorio}">
+
+                                    <i class="fa-solid fa-pen"></i>
+
+                                    <span th:text="#{boton.modificar}">
+                                        Modificar
+                                    </span>
+                                </a>
 
                                 <form th:if="${laboratorio.activo}"
                                       th:action="@{/laboratorio/eliminar}"
                                       method="post"
                                       class="d-inline"
-                                      onsubmit="return confirm(
-                                      '¿Desea desactivar este laboratorio?');">
+                                      th:attr="onsubmit=|return confirm('#{laboratorio.confirmar}');|">
 
                                     <input type="hidden"
                                            name="idLaboratorio"
@@ -90,8 +109,12 @@
 
                                     <button type="submit"
                                             class="btn btn-danger btn-sm">
+
                                         <i class="fa-solid fa-ban"></i>
-                                        Desactivar
+
+                                        <span th:text="#{boton.desactivar}">
+                                            Desactivar
+                                        </span>
                                     </button>
                                 </form>
                             </td>
